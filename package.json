@@ -6,8 +6,13 @@
   "engines": {
     "vscode": "^1.85.0"
   },
+  "publisher": "vijay-nelakurthi",
+  "repository": "https://github.com/WeDontTrack/AutoFlowView",
   "categories": [
-    "Automation Tools", "Testing", "TestNG", "Flow View"
+    "Automation Tools",
+    "Testing",
+    "TestNG",
+    "Flow View"
   ],
   "activationEvents": [
     "onStartupFinished"
@@ -63,7 +68,12 @@
         },
         "autoflowview.colors.preset": {
           "type": "string",
-          "enum": ["default", "ocean", "slate", "rose"],
+          "enum": [
+            "default",
+            "ocean",
+            "slate",
+            "rose"
+          ],
           "default": "default",
           "markdownDescription": "Built-in palette for flow cards, badges, and banners. Ignored for keys you override when **Use custom flow colors** is on."
         },
@@ -89,7 +99,7 @@
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
-    "@types/node": "^22.10.0",
+    "@types/node": "^22.19.21",
     "@types/vscode": "^1.85.0",
     "typescript": "^5.7.0"
   }

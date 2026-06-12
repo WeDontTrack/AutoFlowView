@@ -6,8 +6,8 @@ import { getPreviewHtml } from '../webview/previewHtml';
 import { SerializedFlow, CustomFileInterface } from '../types';
 import { loadSuperclassChain, parseDeclaredClassName } from '../parser/javaInheritance';
 import { buildFlowGraph, computeParallelLayers, mergePrimaryWithSuperclassTests, parseTestNgJavaSource, topologicalOrderForFlow } from '../parser/javaTestNgParser';
-import { JavaContextParser } from '../parser/java/javaContextParser';
-import { TestNGContextParser } from '../parser/testng/testNGContextParser';
+// import { JavaContextParser } from '../parser/java/javaContextParser';
+// import { TestNGContextParser } from '../parser/testng/testNGContextParser';
 
 export class AutoFlowViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType: string = 'autoFlowView.preview';
@@ -163,20 +163,20 @@ async function buildSerializedFlow(uri: vscode.Uri): Promise<SerializedFlow> {
   return { nodes, order, layers, parallelLayerIndexes, cyclic };
 }
 
-async function buildSerializedFlowv2(uri: vscode.Uri): Promise<SerializedFlow> {
-  const javaContextParser = new JavaContextParser(uri);
-  const testNGContextParser = new TestNGContextParser(uri);
-  const primaryClass = javaContextParser.parseDeclaredClassName() ?? path.basename(uri.fsPath, '.java');
-  const primaryParsed = testNGContextParser.parseTestNGJavaSource();
-  const superclassChain = await loadSuperclassChain(uri, javaContextParser.getFileData());
-  const merged = mergePrimaryWithSuperclassTests(
-    primaryClass,
-    primaryParsed,
-    uri.fsPath,
-    superclassChain.map(c => ({ className: c.className, source: c.source, filePath: c.uri.fsPath }))
-  );
-  return { nodes: [], order: [], layers: [], parallelLayerIndexes: [], cyclic: false };
-}
+// async function buildSerializedFlowv2(uri: vscode.Uri): Promise<SerializedFlow> {
+//   const javaContextParser = new JavaContextParser(uri);
+//   const testNGContextParser = new TestNGContextParser(uri);
+//   const primaryClass = javaContextParser.parseDeclaredClassName() ?? path.basename(uri.fsPath, '.java');
+//   const primaryParsed = testNGContextParser.parseTestNGJavaSource();
+//   const superclassChain = await loadSuperclassChain(uri, javaContextParser.getFileData());
+//   const merged = mergePrimaryWithSuperclassTests(
+//     primaryClass,
+//     primaryParsed,
+//     uri.fsPath,
+//     superclassChain.map(c => ({ className: c.className, source: c.source, filePath: c.uri.fsPath }))
+//   );
+//   return { nodes: [], order: [], layers: [], parallelLayerIndexes: [], cyclic: false };
+// }
 
 /** Stable map key for flows / selectedPath (avoids duplicate slashes, mixed separators). */
 function flowPathKey(uriOrFsPath: vscode.Uri | string): string {

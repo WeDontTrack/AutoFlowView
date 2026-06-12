@@ -1,5 +1,5 @@
-import * as vscode from 'vscode';
-import { InheritanceFile } from '../../types';
+// import * as vscode from 'vscode';
+// import { InheritanceFile } from '../../types';
 
 
 export class JavaInheritanceUtil {
@@ -17,5 +17,5 @@ export class JavaInheritanceUtil {
 
 //   private _parsePackageDeclaration(): string | undefined {
 //     return
-  }
+//  }
 }
