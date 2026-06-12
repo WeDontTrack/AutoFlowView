@@ -1,0 +1,96 @@
+{
+  "name": "autoflowview",
+  "displayName": "Auto Flow View",
+  "description": "Visualize TestNG test flows from @Test dependsOnMethods and @Parameters",
+  "version": "0.4.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Automation Tools", "Testing", "TestNG", "Flow View"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "autoflowview.openFlowDiagram",
+        "title": "Open TestNG Flow Diagram",
+        "category": "Auto Flow View"
+      },
+      {
+        "command": "autoflowview.openFlowDiagramFromActiveFile",
+        "title": "Show TestNG Flow for Active Editor",
+        "category": "Auto Flow View"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "autoflowview.openFlowDiagramFromActiveFile",
+        "key": "alt+shift+f",
+        "mac": "alt+shift+f",
+        "when": "editorLangId == java"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "autoFlowViewContainer",
+          "title": "Auto Flow",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "autoFlowViewContainer": [
+        {
+          "type": "webview",
+          "id": "autoFlowView.preview",
+          "name": "TestNG Flow Preview",
+          "contextualTitle": "Flow"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Auto Flow View",
+      "properties": {
+        "autoflowview.syncPreviewWithActiveEditor": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "When enabled, the TestNG Flow preview reloads when you **switch to** a `.java` editor or **save** the active file (debounced). Turn off to avoid background work or focus on manually invoked previews only."
+        },
+        "autoflowview.colors.preset": {
+          "type": "string",
+          "enum": ["default", "ocean", "slate", "rose"],
+          "default": "default",
+          "markdownDescription": "Built-in palette for flow cards, badges, and banners. Ignored for keys you override when **Use custom flow colors** is on."
+        },
+        "autoflowview.colors.useCustom": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "When enabled, non-empty entries in **Custom flow colors** override the selected preset for those elements."
+        },
+        "autoflowview.colors.custom": {
+          "type": "object",
+          "default": {},
+          "markdownDescription": "Per-element hex colors (`#rgb` or `#rrggbb`) that override the preset when **Use custom flow colors** is on. Keys: `primaryStepBackground`, `primaryStepBorder`, `primaryStepForeground`, `externalStepBackground`, `externalStepBorder`, `externalStepForeground`, `declaringClassForeground`, `paramBadgeBackground`, `paramBadgeForeground`, `paramBadgeBorder`, `parallelBannerBackground`, `parallelBannerForeground`, `parallelBannerBorder`, `warningBackground`, `warningForeground`, `warningBorder`, `keysLabelForeground`, `superCallBackground`, `superCallForeground`, `superCallBorder`.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.7.0"
+  }
+}
