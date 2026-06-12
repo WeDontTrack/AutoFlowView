@@ -68,3 +68,7 @@ Open this folder in VS Code and press **F5** to launch the **Extension Developme
 - VS Code **1.85+** (see `engines` in `package.json`).
 - Workspace should contain the `.java` files you analyze (superclass resolution uses workspace search).
 
+
+## Contact
+
+- For any issues/queries/feature request - please raise issue on [AutoFlowView](https://github.com/WeDontTrack/AutoFlowView) repo
